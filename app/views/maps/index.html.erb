@@ -34,6 +34,9 @@
       <dt>Terc</dt>
       <dd><%=@current.terc%></dd>
     </dl>
+    <% @voivodeships.each do |voivodeship| %>
+      <%= "#{voivodeship.name} " %>
+    <% end %>
     <% @places.each do |place| %>
       <%= link_to place.name, maps_path(id: place.id) %>
     <% end %>

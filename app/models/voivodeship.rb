@@ -1,0 +1,2 @@
+class Voivodeship < ApplicationRecord
+end
