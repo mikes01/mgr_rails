@@ -17,16 +17,16 @@ ActiveRecord::Schema.define(version: 20170424202501) do
   enable_extension "postgis"
 
   create_table "places", force: :cascade do |t|
-    t.geometry "coordinates",  limit: {:srid=>0, :type=>"point"}
-    t.string   "name"
-    t.string   "object_type"
-    t.string   "object_class"
-    t.string   "voivodeship"
-    t.string   "county"
-    t.string   "commune"
-    t.string   "terc"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.geography "coordinates",  limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.string    "name"
+    t.string    "object_type"
+    t.string    "object_class"
+    t.string    "voivodeship"
+    t.string    "county"
+    t.string    "commune"
+    t.string    "terc"
+    t.datetime  "created_at",                                                            null: false
+    t.datetime  "updated_at",                                                            null: false
   end
 
 end
