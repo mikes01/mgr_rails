@@ -1,0 +1,2 @@
+class RegistrationArea < ApplicationRecord
+end

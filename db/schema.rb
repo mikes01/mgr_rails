@@ -10,11 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427200821) do
+ActiveRecord::Schema.define(version: 20170427222120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "communes", force: :cascade do |t|
+    t.string   "name",                                                   null: false
+    t.geometry "coordinates", limit: {:srid=>0, :type=>"multi_polygon"}, null: false
+    t.string   "terc",                                                   null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
+
+  create_table "counties", force: :cascade do |t|
+    t.string   "name",                                                   null: false
+    t.geometry "coordinates", limit: {:srid=>0, :type=>"multi_polygon"}, null: false
+    t.string   "terc",                                                   null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
 
   create_table "places", force: :cascade do |t|
     t.geography "coordinates",  limit: {:srid=>4326, :type=>"point", :geographic=>true}
@@ -29,11 +45,26 @@ ActiveRecord::Schema.define(version: 20170427200821) do
     t.datetime  "updated_at",                                                            null: false
   end
 
+  create_table "registration_areas", force: :cascade do |t|
+    t.string   "name",                                                   null: false
+    t.geometry "coordinates", limit: {:srid=>0, :type=>"multi_polygon"}, null: false
+    t.string   "terc",                                                   null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
+
+  create_table "registration_units", force: :cascade do |t|
+    t.string   "name",                                                   null: false
+    t.geometry "coordinates", limit: {:srid=>0, :type=>"multi_polygon"}, null: false
+    t.string   "terc",                                                   null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
+
   create_table "voivodeships", force: :cascade do |t|
     t.string   "name",                                                   null: false
     t.geometry "coordinates", limit: {:srid=>0, :type=>"multi_polygon"}, null: false
     t.string   "terc",                                                   null: false
-    t.integer  "area",                                                   null: false
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
   end

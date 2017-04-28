@@ -1,0 +1,2 @@
+class RegistrationUnit < ApplicationRecord
+end
