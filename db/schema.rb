@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427222120) do
+ActiveRecord::Schema.define(version: 20170506230803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 20170427222120) do
     t.datetime "updated_at",                                             null: false
   end
 
+  create_table "lines", force: :cascade do |t|
+    t.string   "name",                                                                    null: false
+    t.geometry "coordinates", limit: {:srid=>0, :type=>"multi_line_string"},              null: false
+    t.string   "highway",                                                    default: ""
+    t.string   "waterway",                                                   default: ""
+    t.string   "aerialway",                                                  default: ""
+    t.string   "barrier",                                                    default: ""
+    t.string   "man_made",                                                   default: ""
+    t.integer  "z_order",                                                                 null: false
+    t.string   "ump_type",                                                   default: ""
+    t.datetime "created_at",                                                              null: false
+    t.datetime "updated_at",                                                              null: false
+  end
+
   create_table "places", force: :cascade do |t|
     t.geography "coordinates",  limit: {:srid=>4326, :type=>"point", :geographic=>true}
     t.string    "name"
@@ -43,6 +57,25 @@ ActiveRecord::Schema.define(version: 20170427222120) do
     t.string    "terc"
     t.datetime  "created_at",                                                            null: false
     t.datetime  "updated_at",                                                            null: false
+  end
+
+  create_table "populations", force: :cascade do |t|
+    t.geometry "coordinates",  limit: {:srid=>0, :type=>"multi_polygon"}, null: false
+    t.integer  "total",                                                   null: false
+    t.integer  "total_0_14",                                              null: false
+    t.integer  "total_15_64",                                             null: false
+    t.integer  "total_65",                                                null: false
+    t.integer  "total_male",                                              null: false
+    t.integer  "total_female",                                            null: false
+    t.integer  "male_0_14",                                               null: false
+    t.integer  "male_15_64",                                              null: false
+    t.integer  "male_65",                                                 null: false
+    t.integer  "female_0_14",                                             null: false
+    t.integer  "female_15_64",                                            null: false
+    t.integer  "female_65",                                               null: false
+    t.float    "female_ratio",                                            null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   create_table "registration_areas", force: :cascade do |t|
