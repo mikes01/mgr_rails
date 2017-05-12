@@ -33,17 +33,11 @@ ActiveRecord::Schema.define(version: 20170506230803) do
   end
 
   create_table "lines", force: :cascade do |t|
-    t.string   "name",                                                                    null: false
-    t.geometry "coordinates", limit: {:srid=>0, :type=>"multi_line_string"},              null: false
-    t.string   "highway",                                                    default: ""
-    t.string   "waterway",                                                   default: ""
-    t.string   "aerialway",                                                  default: ""
-    t.string   "barrier",                                                    default: ""
-    t.string   "man_made",                                                   default: ""
-    t.integer  "z_order",                                                                 null: false
-    t.string   "ump_type",                                                   default: ""
-    t.datetime "created_at",                                                              null: false
-    t.datetime "updated_at",                                                              null: false
+    t.string   "name",                                                                       null: false
+    t.geometry "coordinates", limit: {:srid=>4326, :type=>"multi_line_string"},              null: false
+    t.string   "road_type",                                                     default: ""
+    t.datetime "created_at",                                                                 null: false
+    t.datetime "updated_at",                                                                 null: false
   end
 
   create_table "places", force: :cascade do |t|

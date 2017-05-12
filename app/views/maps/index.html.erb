@@ -1,14 +1,10 @@
 <% provide(:title, 'Map') %>
 <h1>Map</h1>
-
+  
+  <input id="name" type="text" data-provide="typeahead" autocomplete="off">
 
   <div class="col-md-8" style="height: 100%">
-    <%= map(container_id: :map,
-      center: {
-        latlng: [@current.coordinates.y, @current.coordinates.x],
-        zoom: 15
-      }
-    ) %>
+    <div id="map" />
   </div>
 
   <div class="col-md-3">
@@ -34,10 +30,4 @@
       <dt>Terc</dt>
       <dd><%=@current.terc%></dd>
     </dl>
-    <% @voivodeships.each do |voivodeship| %>
-      <%= "#{voivodeship.name} " %>
-    <% end %>
-    <% @places.each do |place| %>
-      <%= link_to place.name, maps_path(id: place.id) %>
-    <% end %>
   </div>
