@@ -64,3 +64,6 @@ gem 'simple_form'
 gem 'bootstrap3_autocomplete_input'
 gem 'jquery-ui-rails'
 gem 'active_model_serializers'
+
+gem 'toastr-rails'
+gem 'jquery-turbolinks'

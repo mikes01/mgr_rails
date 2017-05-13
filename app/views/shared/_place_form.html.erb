@@ -1,0 +1,13 @@
+<div class="col-md-12">
+  <%= simple_form_for(place, html: { id: "remote_form", class: 'form-horizontal', data: { remote: "true" } }) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :coordinates, as: :text %>
+    <%= f.input :object_type, as: :select, collection: Place::OBJECT_TYPES, include_blank: false %>
+    <%= f.input :object_class, as: :select, collection: Place::OBJECT_CLASSES, include_blank: false %>
+    <%= f.input :terc %>
+    <%= f.input :voivodeship %>
+    <%= f.input :county %>
+    <%= f.input :commune %>
+    <%= f.button :submit %>
+  <% end %>
+</div>

@@ -14,7 +14,7 @@
       <% end %>
       <div class="row">
         <div id="points_checks" class="col-md-11 col-md-offset-1" >
-          <%["część kolonii", "część miasta", "część osady", "część przysiółka", "część wsi", "kolonia", "kolonia kolonii", "kolonia osady", "kolonia wsi", "leśniczówka", "miasto", "osada", "osada kolejowa", "osada kolonii", "osada leśna", "osada leśna wsi", "osada młyńska", "osada osady", "osada wsi", "osiedle", "osiedle wsi", "przysiółek", "przysiółek kolonii", "przysiółek osady", "przysiółek wsi", "schronisko turystyczne", "wieś"].each do |object_type| %>
+          <% Place::OBJECT_TYPES.each do |object_type| %>
             <%= label_tag object_type do %>
               <%= check_box_tag object_type %>
               <%= object_type %>
@@ -65,10 +65,32 @@
 </div>
 </div>
 
-<div id="maps">
-    <div id="mappage">
-        <div id="map"></div>
+<div class="col-md-4">
+  <div class="row">
+    <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Add <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a id="point">Point</a></li>
+      <li><a >Line action</a></li>
+      <li><a >Polygon</a></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div id="form-holder">
     </div>
+  </div>
+  </div>
+</div>
+
+</div> 
+
+<div class="col-md-8" id="maps">
+  <div id="mappage">
+    <div id="map"></div>
+  </div>
 </div>
 
 

@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require leaflet
+ *= require toastr
  *= require_self
  */
 
@@ -38,7 +39,7 @@ html, body, #map, .row-fluid{
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: 800px !important;
+    min-height: 750px !important;
     z-index: 1 !important;
     overflow: hidden !important;
 }

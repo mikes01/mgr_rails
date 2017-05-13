@@ -11,11 +11,71 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
+
 //= require leaflet
 //= require bootstrap-sprockets
 //= require bootstrap3-typeahead.min
 //= require wicket
 //= require wicket-leaflet
+//= require toastr
+//= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  
+  
+ toastr.options = {
+                  "closeButton": false,
+                  "debug": false,
+                  "positionClass": "toast-bottom-right",
+                  "onclick": null,
+                  "showDuration": "300",
+                  "hideDuration": "1000",
+                  "timeOut": "5000",
+                  "extendedTimeOut": "1000",
+                  "showEasing": "swing",
+                  "hideEasing": "linear",
+                  "showMethod": "fadeIn",
+                  "hideMethod": "fadeOut"
+              }
+
+});
+
+$(document).on('ajax:success', '#remote_form', function(e, data, status, xhr){
+      toastr.success('New object is added!', 'Success')
+      showForm({html: ""})
+      point = wkt.read(data.coordinates).components[0]
+      map.setView([point.y, point.x])
+    }).on('ajax:error', '#remote_form', function(e, xhr, status, error){
+      showForm(xhr.responseJSON)
+    });
+
+$(document).on('turbolinks:load', function() {
+  $('#point').click(function () {
+    console.log('jQuery.click()');
+    $.ajax({
+      url: '/places/render_form',
+      method: 'POST',
+      data: { id: 1 }
+    }).done(showForm)
+      .error(showErrorAlert);
+    return true;
+  });
+
+  
+});
+
+showForm = function(data) {
+  $('#form-holder').html(data.html);
+}
+
+showErrorAlert = function(data) {
+  if(data.status == 401) {
+    window.location.reload();
+  }
+  else {
+    alert('Something went wrong. Please try again later.');
+  }
+}
