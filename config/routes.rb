@@ -6,4 +6,5 @@ Rails.application.routes.draw do
     get :search, on: :collection
   end
   resources :lines, only: [:index]
+  resources :polygons, only: [:index]
 end

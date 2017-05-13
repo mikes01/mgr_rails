@@ -20,6 +20,10 @@
 //= require wicket-leaflet
 //= require_tree .
 
+var rendered_points = [];
+var rendered_lines = [];
+var rendered_polygons = [];
+
 $(document).on('turbolinks:load', function() {
   var map = L.map('map', {
       center: [51.1000000, 17.0333300],
@@ -27,7 +31,9 @@ $(document).on('turbolinks:load', function() {
   });
 
   wkt = new Wkt.Wkt();
-  
+
+  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
   updateMap(map);
   
 
@@ -66,13 +72,14 @@ updateMap = function(map) {
     south_west_lat: bounds.getSouthWest().lat,
     south_west_lng: bounds.getSouthWest().lng
   }
+  console.log(map.getZoom());
 
   loadPlaces(map, parameters);
   loadLines(map, parameters);
-  layers.forEach(function (layer) {
-    map.removeLayer(layer);
-  });
-  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  loadPolygons(map, parameters);
+  // layers.forEach(function (layer) {
+  //   map.removeLayer(layer);
+  // });
 }
 
 loadPlaces = function(map, parameters) {
@@ -93,6 +100,8 @@ loadPlaces = function(map, parameters) {
           "Places": places
       };
       places.addTo(map);
+      map.removeLayer(rendered_points);
+      rendered_points = places;
     });
 }
 
@@ -104,7 +113,22 @@ loadLines = function(map, parameters) {
       data.forEach(function(line) {
         lines.push(wkt.read( line.coordinates ).toObject())
       });
-      console.log(lines);
       var polylines = L.layerGroup(lines).addTo(map);
+      map.removeLayer(rendered_lines);
+      rendered_lines = polylines;
     });
+}
+
+loadPolygons = function(map, parameters) {
+  $.get("polygons.json", { data: parameters },
+    function (data) {
+      var polygons = []
+      data.forEach(function(polygon) {
+        polygons.push(wkt.read( polygon.coordinates ).toObject())
+      });
+      var polygons_to_render = L.layerGroup(polygons).addTo(map);
+      map.removeLayer(rendered_polygons);
+      rendered_polygons = polygons_to_render;
+    });
+
 }

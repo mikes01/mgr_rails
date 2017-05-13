@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506230803) do
+ActiveRecord::Schema.define(version: 20170512221711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "all_polygons", force: :cascade do |t|
+    t.string   "name",                                                   null: false
+    t.geometry "coordinates", limit: {:srid=>0, :type=>"multi_polygon"}, null: false
+    t.string   "terc",                                                   null: false
+    t.integer  "unit_type",                                              null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
 
   create_table "communes", force: :cascade do |t|
     t.string   "name",                                                   null: false
