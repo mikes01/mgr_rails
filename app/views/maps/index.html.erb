@@ -1,33 +1,76 @@
 <% provide(:title, 'Map') %>
-<h1>Map</h1>
-  
-  <input id="name" type="text" data-provide="typeahead" autocomplete="off">
-
-  <div class="col-md-8" style="height: 100%">
-    <div id="map" />
+<div class="row"> 
+<div class="col-md-12" >
+  <div class="row">
+    <div class="col-md-10" >
+      <input id="name" type="text" data-provide="typeahead" autocomplete="off" placeholder="center map on place">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" >
+      <%= label_tag :points do %>
+        <%= check_box_tag :points, 1, true %>
+        Points
+      <% end %>
+      <div class="row">
+        <div id="points_checks" class="col-md-11 col-md-offset-1" >
+          <%["część kolonii", "część miasta", "część osady", "część przysiółka", "część wsi", "kolonia", "kolonia kolonii", "kolonia osady", "kolonia wsi", "leśniczówka", "miasto", "osada", "osada kolejowa", "osada kolonii", "osada leśna", "osada leśna wsi", "osada młyńska", "osada osady", "osada wsi", "osiedle", "osiedle wsi", "przysiółek", "przysiółek kolonii", "przysiółek osady", "przysiółek wsi", "schronisko turystyczne", "wieś"].each do |object_type| %>
+            <%= label_tag object_type do %>
+              <%= check_box_tag object_type %>
+              <%= object_type %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="col-md-3">
-    <dl class="dl-horizontal">
-      <dt>Nazwa</dt>
-      <dd><%=@current.name%></dd>
-
-      <dt>Typ</dt>
-      <dd><%=@current.object_type%></dd>
-
-      <dt>Klasa</dt>
-      <dd><%=@current.object_class%></dd>
-
-      <dt>Województwo</dt>
-      <dd><%=@current.voivodeship%></dd>
-
-      <dt>Powiat</dt>
-      <dd><%=@current.county%></dd>
-
-      <dt>Gmina</dt>
-      <dd><%=@current.commune%></dd>
-
-      <dt>Terc</dt>
-      <dd><%=@current.terc%></dd>
-    </dl>
+  <div class="row">
+    <div class="col-md-12" >
+      <%= label_tag :lines do %>
+        <%= check_box_tag :lines, 1, true %>
+        Lines
+      <% end %>
+      <div class="row">
+        <div id="lines_checks" class="col-md-11 col-md-offset-1" >
+          <%["bridleway", "cycleway", "footway", "living_street", "motorway", "motorway_link", "path", "pedestrian", "primary", "primary_link", "residential", "secondary", "secondary_link", "service", "steps", "tertiary", "tertiary_link", "track", "track_grade1", "track_grade2", "track_grade3", "track_grade4", "track_grade5", "trunk", "trunk_link", "unclassified", "unknown"].each do |object_type| %>
+            <%= label_tag object_type do %>
+              <%= check_box_tag object_type %>
+              <%= object_type %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12" >
+      <%= label_tag :polygons do %>
+        <%= check_box_tag :polygons, 1, true %>
+        Polygons
+      <% end %>
+      <div class="row">
+        <div id="polygons_checks" class="col-md-11 col-md-offset-1" >
+          <% ["Commune", "County", "RegistrationArea", "RegistrationUnit", "Voivodeship"].each do |object_type| %>
+            <%= label_tag object_type do %>
+              <%= check_box_tag object_type %>
+              <%= object_type %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="maps">
+    <div id="mappage">
+        <div id="map"></div>
+    </div>
+</div>
+
+
+    
+
