@@ -6,10 +6,11 @@ loadLines = function() {
       if(renderLines) {
         var lines = []
         data.forEach(function(line) {
-          lines.push(wkt.read( line.coordinates ).toObject({title: line.name})
-          .on('click', L.bind(onLineClick, null, line)))
+          lines.push(wkt.read( line.coordinates ).toObject(
+            {color: line.color, pane: 'lines'})
+            .on('click', L.bind(onLineClick, null, line)))
         });
-        var polylines = L.layerGroup(lines).addTo(map);
+        var polylines = L.layerGroup(lines).setZIndex(100).addTo(map);
         lines.forEach(function(line) {
           line.openPopup()
         });

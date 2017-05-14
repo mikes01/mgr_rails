@@ -6,7 +6,26 @@ loadPlaces = function() {
       if(renderPoints) {
         var markers = []
         data.forEach(function(place) {
-          markers.push(wkt.read(place.coordinates).toObject({title: place.name})
+          console.log(place)
+
+          var markerHtmlStyles =
+            "background-color: " + place.color +"; \
+            width: 3rem;\
+            height: 3rem;\
+            display: block;\
+            left: -1.5rem;\
+            top: -1.5rem;\
+            position: relative;\
+            border-radius: 3rem 3rem 0;\
+            transform: rotate(45deg);\
+            border: 1px solid #FFFFFF"
+
+          var icon = L.divIcon({
+            className: 'customIcon',
+            iconAnchor: [0, -5],
+            html: '<span style="' + markerHtmlStyles + '" />'
+          })
+          markers.push(wkt.read(place.coordinates).toObject({title: place.name, icon: icon})
             .on('click', L.bind(onPlaceClick, null, place))
             .bindTooltip(place.name,
             {
@@ -15,6 +34,7 @@ loadPlaces = function() {
             }
           ))
         })
+        console.log(markers)
         var places = L.layerGroup(markers);
         var overlayMaps = {
           "Places": places

@@ -4,7 +4,7 @@
   class: 'form-horizontal ' + className, data: { remote: "true" } }) do |f| %>
   <%= f.input :name %>
   <%= f.input :coordinates, as: :text %>
-  <%= f.input :unit_type, as: :select, collection: Polygon::UNIT_TYPES, include_blank: false %>
+  <%= f.input :unit_type, as: :select, collection: Polygon::UNIT_TYPES.keys, include_blank: false %>
   <%= f.input :terc %>
   <%= f.button :submit %>
   <% if polygon.persisted? %>

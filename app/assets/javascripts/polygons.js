@@ -6,10 +6,11 @@ loadPolygons = function() {
       if(renderPolygons) {
         var polygons = []
         data.forEach(function(polygon) {
-          polygons.push(wkt.read( polygon.coordinates ).toObject()
+          polygons.push(wkt.read( polygon.coordinates ).toObject({
+            color: polygon.color, pane: 'polygons'})
             .on('click', L.bind(onPolygonClick, null, polygon)))
         });
-        var polygonsToRender = L.layerGroup(polygons).addTo(map);
+        var polygonsToRender = L.layerGroup(polygons).setZIndex(-1).addTo(map);
         clearPolygons();
         renderedPolygons = polygonsToRender;
       }

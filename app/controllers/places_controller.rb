@@ -4,7 +4,8 @@ class PlacesController < ApplicationController
     sw = factory.point(params[:data][:south_west_lng], params[:data][:south_west_lat])
     ne = factory.point(params[:data][:north_east_lng], params[:data][:north_east_lat])
     window = RGeo::Cartesian::BoundingBox.create_from_points(sw, ne).to_geometry
-    render json: Place.where(object_type: params[:data][:object_types]).where("coordinates && ?", window)
+    render json: Place.where(object_type: params[:data][:object_types])
+      .where("coordinates && ?", window).to_json(methods: [:color])
   end
 
   def create

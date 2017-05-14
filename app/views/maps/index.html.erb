@@ -14,9 +14,10 @@
       <% end %>
       <div class="row">
         <div id="points_checks" class="col-md-11 col-md-offset-1" >
-          <% Place::OBJECT_TYPES.each do |object_type| %>
+          <% Place::OBJECT_TYPES.each do |object_type, color| %>
             <%= label_tag object_type do %>
               <%= check_box_tag object_type %>
+              <%= color_field_tag 'color_' + object_type, color, disabled: true %>
               <%= object_type %>
             <% end %>
           <% end %>
@@ -33,9 +34,10 @@
       <% end %>
       <div class="row">
         <div id="lines_checks" class="col-md-11 col-md-offset-1" >
-          <% Line::ROAD_TYPES.each do |object_type| %>
+          <% Line::ROAD_TYPES.each do |object_type, color| %>
             <%= label_tag object_type do %>
               <%= check_box_tag object_type %>
+              <%= color_field_tag 'color_' + object_type, color, disabled: true %>
               <%= object_type %>
             <% end %>
           <% end %>
@@ -52,9 +54,10 @@
       <% end %>
       <div class="row">
         <div id="polygons_checks" class="col-md-11 col-md-offset-1" >
-          <% Polygon::UNIT_TYPES.sort.each do |object_type| %>
+          <% Polygon::UNIT_TYPES.each do |object_type, color| %>
             <%= label_tag object_type do %>
               <%= check_box_tag object_type %>
+              <%= color_field_tag 'color_' + object_type, color, disabled: true %>
               <%= object_type %>
             <% end %>
           <% end %>

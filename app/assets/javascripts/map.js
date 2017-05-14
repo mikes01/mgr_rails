@@ -9,6 +9,11 @@ $(document).on('turbolinks:load', function() {
       zoom: 16
   });
 
+  map.createPane('lines');
+  map.getPane('lines').style.zIndex = 500;
+  map.createPane('polygons');
+  map.getPane('polygons').style.zIndex = 400;
+
   wkt = new Wkt.Wkt();
 
   L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
