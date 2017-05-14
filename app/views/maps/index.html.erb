@@ -52,7 +52,7 @@
       <% end %>
       <div class="row">
         <div id="polygons_checks" class="col-md-11 col-md-offset-1" >
-          <% ["Commune", "County", "RegistrationArea", "RegistrationUnit", "Voivodeship"].each do |object_type| %>
+          <% Polygon::UNIT_TYPES.sort.each do |object_type| %>
             <%= label_tag object_type do %>
               <%= check_box_tag object_type %>
               <%= object_type %>
@@ -74,7 +74,7 @@
     <ul class="dropdown-menu">
       <li><a id="point">Point</a></li>
       <li><a id="line">Line</a></li>
-      <li><a >Polygon</a></li>
+      <li><a id="polygon">Polygon</a></li>
     </ul>
   </div>
   <div class="row">
