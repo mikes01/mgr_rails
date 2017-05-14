@@ -1,8 +1,7 @@
-<div class="col-md-12">
-  <%= simple_form_for(line, html: { id: "remote_form", class: 'form-horizontal', data: { remote: "true" } }) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :coordinates, as: :text %>
-    <%= f.input :road_type, as: :select, collection: Line::ROAD_TYPES, include_blank: false %>
-    <%= f.button :submit %>
-  <% end %>
-</div>
+
+<%= simple_form_for(line, html: { id: "line_remote_form", class: 'form-horizontal', data: { remote: "true" } }) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :coordinates, as: :text %>
+  <%= f.input :road_type, as: :select, collection: Line::ROAD_TYPES, include_blank: false %>
+  <%= f.button :submit %>
+<% end %>

@@ -23,10 +23,10 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function() {
-  
-  
- toastr.options = {
+$(document).on('turbolinks:load', function() {
+  $(".form-horizontal").hide()
+
+  toastr.options = {
                   "closeButton": false,
                   "debug": false,
                   "positionClass": "toast-bottom-right",
@@ -41,68 +41,6 @@ $(document).ready(function() {
                   "hideMethod": "fadeOut"
               }
 
-});
-
-$(document).on('ajax:success', '#remote_form', function(e, data, status, xhr){
-      toastr.success('New object is added!', 'Success')
-      showForm({html: ""})
-      point = wkt.read(data.coordinates).components[0]
-      if(Array.isArray(point))
-        point = point[0]
-      if(Array.isArray(point))
-        point = point[0]
-      map.setView([point.y, point.x])
-    }).on('ajax:error', '#remote_form', function(e, xhr, status, error){
-      showForm(xhr.responseJSON)
-    });
-
-$(document).on('turbolinks:load', function() {
-  $('#point').click(function () {
-    console.log('jQuery.click()');
-    $.ajax({
-      url: '/places/render_form',
-      method: 'POST',
-      data: { id: 1 }
-    }).done(showForm)
-      .error(showErrorAlert);
-    return true;
-  });
-
-  $('#line').click(function () {
-    console.log('jQuery.click()');
-    $.ajax({
-      url: '/lines/render_form',
-      method: 'POST',
-      data: { id: 1 }
-    }).done(showForm)
-      .error(showErrorAlert);
-    return true;
-  });
-
-
-  $('#polygon').click(function () {
-    console.log('jQuery.click()');
-    $.ajax({
-      url: '/polygons/render_form',
-      method: 'POST',
-      data: { id: 0 }
-    }).done(showForm)
-      .error(showErrorAlert);
-    return true;
-  });
-
   
 });
 
-showForm = function(data) {
-  $('#form-holder').html(data.html);
-}
-
-showErrorAlert = function(data) {
-  if(data.status == 401) {
-    window.location.reload();
-  }
-  else {
-    alert('Something went wrong. Please try again later.');
-  }
-}

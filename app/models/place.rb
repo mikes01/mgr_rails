@@ -13,7 +13,7 @@ class Place < ApplicationRecord
   validates :coordinates, presence: true
   validates :object_type, presence: true, inclusion: { in: OBJECT_TYPES }
   validates :object_class, presence: true, inclusion: { in: OBJECT_CLASSES }
-  validates :terc, format: { with: /\b(\d{7})\b/,
+  validates :terc, presence: true, format: { with: /\b(\d{7})\b/,
                  message: "TERC needs to have 7 digits" }
 
   def to_s

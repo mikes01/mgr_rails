@@ -80,8 +80,17 @@
   <div class="row">
     <div class="col-md-8">
       <div id="form-holder">
+        <div id="place_remote_form_holder" class="col-md-12">
+          <%= render partial: "shared/place_form", locals: { place: Place.new } %>
+        </div>
+        <div id="line_remote_form_holder" class="col-md-12">
+          <%= render partial: "shared/line_form", locals: { line: Line.new } %>
+        </div>
+        <div id="polygon_remote_form_holder" class="col-md-12">
+          <%= render partial: "shared/polygon_form", locals: { polygon: Polygon.new } %>
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 </div>
 

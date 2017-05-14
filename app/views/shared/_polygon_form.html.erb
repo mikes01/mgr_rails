@@ -1,0 +1,8 @@
+
+<%= simple_form_for(polygon, html: { id: "polygon_remote_form", class: 'form-horizontal', data: { remote: "true" } }) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :coordinates, as: :text %>
+  <%= f.input :unit_type, as: :select, collection: Polygon::UNIT_TYPES, include_blank: false %>
+  <%= f.input :terc %>
+  <%= f.button :submit %>
+<% end %>
