@@ -1,6 +1,6 @@
 class Polygon < ApplicationRecord
-  UNIT_TYPES = ["Voivodeship", "County", "Commune", "RegistrationArea",
-    "RegistrationUnit"]
+  UNIT_TYPES = ["voivodeship", "county", "commune", "registration_area",
+    "registration_unit", 'custom']
 
   enum unit_type: UNIT_TYPES
 

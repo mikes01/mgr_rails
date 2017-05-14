@@ -46,24 +46,3 @@ getMapBounds = function() {
     south_west_lng: bounds.getSouthWest().lng
   }
 }
-
-loadPolygons = function() {
-  parameters = getMapBounds()
-  parameters.unit_types = polygonTypes
-  $.get("polygons.json", { data: parameters },
-    function (data) {
-      if(renderPolygons) {
-        var polygons = []
-        data.forEach(function(polygon) {
-          polygons.push(wkt.read( polygon.coordinates ).toObject())
-        });
-        var polygonsToRender = L.layerGroup(polygons).addTo(map);
-        clearPolygons();
-        renderedPolygons = polygonsToRender;
-      }
-    });
-}
-
-clearPolygons = function() {
-  map.removeLayer(renderedPolygons);
-}

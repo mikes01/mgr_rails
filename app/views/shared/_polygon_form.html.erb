@@ -7,4 +7,8 @@
   <%= f.input :unit_type, as: :select, collection: Polygon::UNIT_TYPES, include_blank: false %>
   <%= f.input :terc %>
   <%= f.button :submit %>
+  <% if polygon.persisted? %>
+    <%= link_to 'Delete', polygon_path(polygon), class: 'btn btn-danger',
+      confirm: 'Are you sure?', method: :delete, remote: true %>
+  <% end %>
 <% end %>

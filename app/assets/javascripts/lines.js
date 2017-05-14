@@ -20,7 +20,6 @@ loadLines = function() {
 }
 
 onLineClick = function(line, event) {
-  console.log(12)
   $(".form-horizontal").hide()
   form = $("#line_remote_form.edit")
   form[0].action = "lines/" + line.id

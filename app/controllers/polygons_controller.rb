@@ -20,11 +20,23 @@ class PolygonsController < ApplicationController
   end
 
   def update
-    
+    @polygon = Polygon.find(params[:id])
+    if @polygon.update(polygon_params)
+      render json: @polygon, status: :ok
+    else
+      render json: {
+        html: render_to_string(partial: 'shared/polygon_form',
+          locals: { polygon: @polygon }, formats: [:html]) }.to_json, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    
+    @polygon = Polygon.find(params[:id])
+    if @polygon.destroy
+      render json: {}, status: :ok
+    else
+      render json: @polygon, status: :unprocessable_entity
+    end
   end
 
   def render_form

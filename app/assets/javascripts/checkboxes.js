@@ -2,7 +2,7 @@
 var pointTypes = ["część miasta", "część wsi", "miasto", "wieś"]
 var lineTypes = ["residential", "secondary", "secondary_link", "primary", "primary_link",
         "tertiary", "tertiary_link", "living_street", "service"]
-var polygonTypes = ["RegistrationArea"]
+var polygonTypes = ["registration_area"]
 
 var renderPoints = true
 var renderLines = true
