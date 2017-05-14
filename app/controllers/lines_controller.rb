@@ -19,6 +19,14 @@ class LinesController < ApplicationController
     end
   end
 
+  def update
+    
+  end
+
+  def destroy
+
+  end
+
   def render_form
     @line = Line.find_by(id: params[:id]) || Line.new
     respond_to do |format|

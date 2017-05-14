@@ -19,6 +19,14 @@ class PolygonsController < ApplicationController
     end
   end
 
+  def update
+    
+  end
+
+  def destroy
+    
+  end
+
   def render_form
     @polygon = Polygon.find_by(id: params[:id]) || Polygon.new
     respond_to do |format|

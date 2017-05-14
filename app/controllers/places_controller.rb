@@ -18,6 +18,26 @@ class PlacesController < ApplicationController
     end
   end
 
+  def update
+    @place = Place.find(params[:id])
+    if @place.update(place_params)
+      render json: @place, status: :ok
+    else
+      render json: {
+        html: render_to_string(partial: 'shared/place_form',
+          locals: { place: @place }, formats: [:html]) }.to_json, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @place = Place.find(params[:id])
+    if @place.destroy
+      render json: {}, status: :ok
+    else
+      render json: @place, status: :unprocessable_entity
+    end
+  end
+
   def search
     @q = Place.search(name_cont: params[:query])
     @places = @q.result(distinct: true).order(:name).limit(10)

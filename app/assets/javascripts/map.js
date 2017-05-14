@@ -47,37 +47,6 @@ getMapBounds = function() {
   }
 }
 
-loadPlaces = function() {
-  parameters = getMapBounds()
-  parameters.object_types = pointTypes
-  $.get("places.json", { data: parameters },
-    function (data) {
-      if(renderPoints) {
-        var markers = []
-        data.forEach(function(place) {
-          markers.push(wkt.read(place.coordinates).toObject({title: place.name}).bindTooltip(place.name,
-            {
-              permanent: true,
-              direction: 'top'
-            }
-          ))
-        })
-        var places = L.layerGroup(markers);
-        var overlayMaps = {
-          "Places": places
-        };
-
-        places.addTo(map);
-        clearPoints()
-        renderedPoints = places;
-      }
-    });
-}
-
-clearPoints = function() {
-  map.removeLayer(renderedPoints);
-}
-
 loadLines = function() {
   parameters = getMapBounds()
   parameters.road_types = lineTypes

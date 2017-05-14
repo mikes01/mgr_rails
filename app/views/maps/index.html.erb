@@ -89,6 +89,19 @@
         <div id="polygon_remote_form_holder" class="col-md-12">
           <%= render partial: "shared/polygon_form", locals: { polygon: Polygon.new } %>
         </div>
+
+        <div id="edit_place_remote_form_holder" class="col-md-12">
+          <%= render partial: "shared/place_form",
+            locals: { place: Place.first } %>
+        </div>
+        <div id="edit_line_remote_form_holder" class="col-md-12">
+          <%= render partial: "shared/line_form",
+            locals: { line: Line.first } %>
+        </div>
+        <div id="edit_polygon_remote_form_holder" class="col-md-12">
+          <%= render partial: "shared/polygon_form",
+            locals: { polygon: Polygon.first } %>
+        </div>
       </div>
     </div>
   </div>
