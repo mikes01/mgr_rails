@@ -47,6 +47,8 @@ $(document).on('ajax:success', '#remote_form', function(e, data, status, xhr){
       toastr.success('New object is added!', 'Success')
       showForm({html: ""})
       point = wkt.read(data.coordinates).components[0]
+      if(Array.isArray(point))
+        point = point[0]
       map.setView([point.y, point.x])
     }).on('ajax:error', '#remote_form', function(e, xhr, status, error){
       showForm(xhr.responseJSON)
@@ -57,6 +59,17 @@ $(document).on('turbolinks:load', function() {
     console.log('jQuery.click()');
     $.ajax({
       url: '/places/render_form',
+      method: 'POST',
+      data: { id: 1 }
+    }).done(showForm)
+      .error(showErrorAlert);
+    return true;
+  });
+
+  $('#line').click(function () {
+    console.log('jQuery.click()');
+    $.ajax({
+      url: '/lines/render_form',
       method: 'POST',
       data: { id: 1 }
     }).done(showForm)

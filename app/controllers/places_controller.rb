@@ -14,7 +14,7 @@ class PlacesController < ApplicationController
     else
       render json: {
         html: render_to_string(partial: 'shared/place_form',
-          locals: { place: @place }, formats: [:html]) }.to_json, status: :bad_request
+          locals: { place: @place }, formats: [:html]) }.to_json, status: :unprocessable_entity
     end
   end
 

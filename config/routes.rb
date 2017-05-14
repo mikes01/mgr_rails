@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     get :search, on: :collection
     post :render_form, on: :collection
   end
-  resources :lines, only: [:index]
+  
+  resources :lines, only: [:index, :create] do
+    post :render_form, on: :collection
+  end
+
   resources :polygons, only: [:index]
 end
