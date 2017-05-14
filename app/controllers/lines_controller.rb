@@ -20,11 +20,23 @@ class LinesController < ApplicationController
   end
 
   def update
-    
+    @line = Line.find(params[:id])
+    if @line.update(line_params)
+      render json: @line, status: :ok
+    else
+      render json: {
+        html: render_to_string(partial: 'shared/line_form',
+          locals: { line: @line }, formats: [:html]) }.to_json, status: :unprocessable_entity
+    end
   end
 
   def destroy
-
+    @line = Line.find(params[:id])
+    if @line.destroy
+      render json: {}, status: :ok
+    else
+      render json: @line, status: :unprocessable_entity
+    end
   end
 
   def render_form

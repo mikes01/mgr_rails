@@ -47,30 +47,6 @@ getMapBounds = function() {
   }
 }
 
-loadLines = function() {
-  parameters = getMapBounds()
-  parameters.road_types = lineTypes
-  $.get("lines.json", { data: parameters },
-    function (data) {
-      if(renderLines) {
-        var lines = []
-        data.forEach(function(line) {
-          lines.push(wkt.read( line.coordinates ).toObject({title: line.name})  )
-        });
-        var polylines = L.layerGroup(lines).addTo(map);
-        lines.forEach(function(line) {
-          line.openPopup()
-        });
-        clearLines();
-        renderedLines = polylines;
-      }
-    });
-}
-
-clearLines = function() {
-  map.removeLayer(renderedLines);
-}
-
 loadPolygons = function() {
   parameters = getMapBounds()
   parameters.unit_types = polygonTypes

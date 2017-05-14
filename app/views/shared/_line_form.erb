@@ -5,4 +5,8 @@
   <%= f.input :coordinates, as: :text %>
   <%= f.input :road_type, as: :select, collection: Line::ROAD_TYPES, include_blank: false %>
   <%= f.button :submit %>
+  <% if line.persisted? %>
+    <%= link_to 'Delete', line_path(line), class: 'btn btn-danger',
+      confirm: 'Are you sure?', method: :delete, remote: true %>
+  <% end %>
 <% end %>
