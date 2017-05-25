@@ -16,15 +16,13 @@ $(document).on('turbolinks:load', function() {
 
   wkt = new Wkt.Wkt();
 
-  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-  loadPlaces();
+  loadPoints();
   loadLines();
   loadPolygons();
   
-
-  //map.on('zoomend', function() { loadPlaces(map) });
-  map.on('moveend', loadPlaces);
+  map.on('moveend', loadPoints);
   map.on('moveend', loadLines);
   map.on('moveend', loadPolygons);
     

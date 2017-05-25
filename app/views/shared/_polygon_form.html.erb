@@ -2,10 +2,10 @@
 
 <%= simple_form_for(polygon, html: { id: "polygon_remote_form",
   class: 'form-horizontal ' + className, data: { remote: "true" } }) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :coordinates, as: :text %>
-  <%= f.input :unit_type, as: :select, collection: Polygon::UNIT_TYPES.keys, include_blank: false %>
-  <%= f.input :terc %>
+  <%= f.input :name, input_html: { id: 'polygon-name' } %>
+  <%= f.input :coordinates, as: :text, input_html: { id: 'polygon-coordinates' } %>
+  <%= f.input :unit_type, as: :select, collection: Polygon::UNIT_TYPES.keys, include_blank: false, input_html: { id: 'polygon-unit_type' } %>
+  <%= f.input :terc, input_html: { id: 'polygon-terc' } %>
   <%= f.button :submit %>
   <% if polygon.persisted? %>
     <%= link_to 'Delete', polygon_path(polygon), class: 'btn btn-danger',

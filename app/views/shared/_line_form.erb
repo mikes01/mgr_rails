@@ -1,9 +1,9 @@
 <% className = (line.persisted? ? 'edit' : 'new') %> 
 
 <%= simple_form_for(line, html: { id: "line_remote_form", class: 'form-horizontal ' + className, data: { remote: "true" } }) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :coordinates, as: :text %>
-  <%= f.input :road_type, as: :select, collection: Line::ROAD_TYPES.keys, include_blank: false %>
+  <%= f.input :name, input_html: { id: 'line-name' } %>
+  <%= f.input :coordinates, as: :text, input_html: { id: 'line-coordinates' } %>
+  <%= f.input :road_type, as: :select, collection: Line::ROAD_TYPES.keys, include_blank: false, input_html: { id: 'line-road_type' } %>
   <%= f.button :submit %>
   <% if line.persisted? %>
     <%= link_to 'Delete', line_path(line), class: 'btn btn-danger',

@@ -15,6 +15,7 @@
 //= require jquery_ujs
 
 //= require leaflet
+//= require select2.full.min
 //= require bootstrap-sprockets
 //= require bootstrap3-typeahead.min
 //= require wicket

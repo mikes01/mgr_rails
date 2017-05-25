@@ -29,7 +29,7 @@ $(document).on('ajax:success', '#place_remote_form.edit', function(e, data, stat
 
 $(document).on('ajax:success', '#place_remote_form.edit a', function(e, data, status, xhr){
   toastr.success('The point is deleted!', 'Success')
-  loadPlaces()
+  loadPoints()
   $(".form-horizontal").hide()
 }).on('ajax:error', '#place_remote_form.edit a', function(e, xhr, status, error){
   $("#edit_place_remote_form_holder").html(xhr.responseJSON.html)

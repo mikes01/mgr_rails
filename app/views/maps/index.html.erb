@@ -1,87 +1,58 @@
-<% provide(:title, 'Map') %>
-<div class="row"> 
-<div class="col-md-12" >
-  <div class="row">
-    <div class="col-md-10" >
-      <input id="name" type="text" data-provide="typeahead" autocomplete="off" placeholder="center map on place">
-    </div>
-  </div>
+<div class="col-md-4" >
   <div class="row">
     <div class="col-md-12" >
-      <%= label_tag :points do %>
-        <%= check_box_tag :points, 1, true %>
-        Points
-      <% end %>
       <div class="row">
-        <div id="points_checks" class="col-md-11 col-md-offset-1" >
-          <% Place::OBJECT_TYPES.each do |object_type, color| %>
-            <%= label_tag object_type do %>
-              <%= check_box_tag object_type %>
-              <%= color_field_tag 'color_' + object_type, color, disabled: true %>
-              <%= object_type %>
-            <% end %>
+        <label for="points">
+          Points
+        </label>
+        <select class="form-control select2-input" id="point_types" multiple="multiple">
+          <% Place::OBJECT_TYPES.each do |name, color| %>
+            <%= "<option style='background-color: #{color}' value='#{name}'>#{name}</option>".html_safe %>
           <% end %>
+        </select>
+        <button id="clear-points", class="btn btn-default">Clear</button>
+        <button id="all-points", class="btn btn-default">All</button>
+      </div>
+      <div class="row">
+        <label for="lines">
+          Lines
+        </label>
+        <select class="form-control select2-input" id="line_types" multiple="multiple">
+          <% Line::ROAD_TYPES.each do |name, color| %>
+            <%= "<option style='background-color: #{color}' value='#{name}'>#{name}</option>".html_safe %>
+          <% end %>
+        </select>
+        <button id="clear-lines", class="btn btn-default">Clear</button>
+        <button id="all-lines", class="btn btn-default">All</button>
+      </div>
+      <div class="row">
+        <label for="polygons">
+          Polygons
+        </label>
+        <select class="form-control select2-input" id="polygon_type">
+          <% Polygon::UNIT_TYPES.each_with_index do |record, index| %>
+            <%= "<option style='background-color: #{record[1]}' value='#{index}'>#{record[0]}</option>".html_safe %>
+          <% end %>
+        </select>
+        <button id="clear-polygons", class="btn btn-default">Clear</button>
+        <br /><hr />
+        <button id="refresh-map", class="btn btn-default">Refresh</button>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Add <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a id="point">Point</a></li>
+            <li><a id="line">Line</a></li>
+            <li><a id="polygon">Polygon</a></li>
+          </ul>
         </div>
+        <hr />
       </div>
     </div>
   </div>
-
   <div class="row">
-    <div class="col-md-12" >
-      <%= label_tag :lines do %>
-        <%= check_box_tag :lines, 1, true %>
-        Lines
-      <% end %>
-      <div class="row">
-        <div id="lines_checks" class="col-md-11 col-md-offset-1" >
-          <% Line::ROAD_TYPES.each do |object_type, color| %>
-            <%= label_tag object_type do %>
-              <%= check_box_tag object_type %>
-              <%= color_field_tag 'color_' + object_type, color, disabled: true %>
-              <%= object_type %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12" >
-      <%= label_tag :polygons do %>
-        <%= check_box_tag :polygons, 1, true %>
-        Polygons
-      <% end %>
-      <div class="row">
-        <div id="polygons_checks" class="col-md-11 col-md-offset-1" >
-          <% Polygon::UNIT_TYPES.each do |object_type, color| %>
-            <%= label_tag object_type do %>
-              <%= check_box_tag object_type %>
-              <%= color_field_tag 'color_' + object_type, color, disabled: true %>
-              <%= object_type %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="col-md-4">
-  <div class="row">
-    <div class="btn-group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Add <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <li><a id="point">Point</a></li>
-      <li><a id="line">Line</a></li>
-      <li><a id="polygon">Polygon</a></li>
-    </ul>
-  </div>
-  <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div id="form-holder">
         <div id="place_remote_form_holder" class="col-md-12">
           <%= render partial: "shared/place_form", locals: { place: Place.new } %>
@@ -110,9 +81,12 @@
   </div>
 </div>
 
-</div> 
-
 <div class="col-md-8" id="maps">
+  <div class="row">
+    <b>Points count:</b> <span id="points_count">0</span>&nbsp&nbsp
+    <b>Lines count:</b> <span id="lines_count">0</span>&nbsp&nbsp
+    <b>Polygons count:</b> <span id="polygons_count">0</span>   
+  </span>
   <div id="mappage">
     <div id="map"></div>
   </div>
