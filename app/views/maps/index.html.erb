@@ -6,7 +6,7 @@
           Points
         </label>
         <select class="form-control select2-input" id="point_types" multiple="multiple">
-          <% Place::OBJECT_TYPES.each do |name, color| %>
+          <% Point::OBJECT_TYPES.each do |name, color| %>
             <%= "<option style='background-color: #{color}' value='#{name}'>#{name}</option>".html_safe %>
           <% end %>
         </select>
@@ -54,8 +54,8 @@
   <div class="row">
     <div class="col-md-12">
       <div id="form-holder">
-        <div id="place_remote_form_holder" class="col-md-12">
-          <%= render partial: "shared/place_form", locals: { place: Place.new } %>
+        <div id="point_remote_form_holder" class="col-md-12">
+          <%= render partial: "shared/point_form", locals: { point: Point.new } %>
         </div>
         <div id="line_remote_form_holder" class="col-md-12">
           <%= render partial: "shared/line_form", locals: { line: Line.new } %>
@@ -64,9 +64,9 @@
           <%= render partial: "shared/polygon_form", locals: { polygon: Polygon.new } %>
         </div>
 
-        <div id="edit_place_remote_form_holder" class="col-md-12">
-          <%= render partial: "shared/place_form",
-            locals: { place: Place.first } %>
+        <div id="edit_point_remote_form_holder" class="col-md-12">
+          <%= render partial: "shared/point_form",
+            locals: { point: Point.first } %>
         </div>
         <div id="edit_line_remote_form_holder" class="col-md-12">
           <%= render partial: "shared/line_form",

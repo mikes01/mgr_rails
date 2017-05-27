@@ -1,4 +1,4 @@
-class LoadPlaces < BaseService
+class LoadPoints < BaseService
   def initialize(path)
     self.path = path
   end
@@ -11,7 +11,7 @@ class LoadPlaces < BaseService
     factory = RgeoFactoryBuilder.geography_factory
     file.each do |record|
       coordinates = RGeo::Feature.cast(record.geometry, factory: factory, project: true)
-      Place.create!(coordinates: coordinates,
+      Point.create!(coordinates: coordinates,
         name: record.attributes['naz_glowna'],
         object_type: record.attributes['rodzaj_obi'],
         object_class: record.attributes['klasa_obi'],

@@ -1,4 +1,4 @@
-class Place < ApplicationRecord
+class Point < ApplicationRecord
   OBJECT_TYPES = {"część kolonii" => "#8fa3bf", "część miasta" => "#e51f00",
     "część osady" => "#ffa280", "część przysiółka" => "#e6f23d",
     "część wsi" => "#a6a37c", "kolonia" => "#3b5900", "kolonia kolonii" => "#3df23d",

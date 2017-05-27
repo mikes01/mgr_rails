@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function() {
     
 
   $("#name").typeahead({
-    source: function(query, process) { return $.get("places/search.json", { query: query }, function (data) { process(data); } ); },
+    source: function(query, process) { return $.get("points/search.json", { query: query }, function (data) { process(data); } ); },
     displayText: function(item) {
       return item.name + ', ' + item.commune + ', ' + item.county + ', ' + item.voivodeship;
     },

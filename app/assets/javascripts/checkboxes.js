@@ -18,7 +18,7 @@ $(document).on('turbolinks:load',function() {
     $(".select2-input").select2({
       templateResult: formatState,
       templateSelection: formatState,
-      placeholder: "Select a type"
+      pointholder: "Select a type"
     })
 
     $("#point_types").val(pointTypes).trigger("change")

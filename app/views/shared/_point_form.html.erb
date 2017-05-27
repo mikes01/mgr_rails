@@ -1,0 +1,17 @@
+<% className = (point.persisted? ? 'edit' : 'new') %> 
+
+<%= simple_form_for(point, html: { id: "point_remote_form", class: 'form-horizontal ' + className, data: { remote: "true" } }) do |f| %>
+  <%= f.input :name, input_html: { id: 'point-name' } %>
+  <%= f.input :coordinates, as: :text, input_html: { id: 'point-coordinates' } %>
+  <%= f.input :object_type, as: :select, collection: Point::OBJECT_TYPES.keys, include_blank: false, input_html: { id: 'point-object_type' } %>
+  <%= f.input :object_class, as: :select, collection: Point::OBJECT_CLASSES, include_blank: false, input_html: { id: 'point-object_class' } %>
+  <%= f.input :terc, input_html: { id: 'point-terc' } %>
+  <%= f.input :voivodeship, input_html: { id: 'point-voivodeship' } %>
+  <%= f.input :county, input_html: { id: 'point-county' } %>
+  <%= f.input :commune, input_html: { id: 'point-commune' } %>
+  <%= f.button :submit %>
+  <% if point.persisted? %>
+    <%= link_to 'Delete', point_path(point), class: 'btn btn-danger',
+      confirm: 'Are you sure?', method: :delete, remote: true %>
+  <% end %>
+<% end %>

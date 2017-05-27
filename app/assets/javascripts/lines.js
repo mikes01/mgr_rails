@@ -18,6 +18,7 @@ loadLines = function() {
         line.openPopup()
       });
       clearLines();
+      $('#lines_count').text(data.length)
       renderedLines = polylines;
     });
 }
@@ -35,4 +36,5 @@ onLineClick = function(line, event) {
 
 clearLines = function() {
   map.removeLayer(renderedLines);
+  $('#lines_count').text("0")
 }

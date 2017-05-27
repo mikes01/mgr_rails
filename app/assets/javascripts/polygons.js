@@ -15,6 +15,7 @@ loadPolygons = function() {
       });
       var polygonsToRender = L.layerGroup(polygons).setZIndex(-1).addTo(map);
       clearPolygons();
+      $('#polygons_count').text(data.length)
       renderedPolygons = polygonsToRender;
     });
 }
@@ -33,4 +34,5 @@ onPolygonClick = function(polygon, event) {
 
 clearPolygons = function() {
   map.removeLayer(renderedPolygons);
+  $('#polygons_count').text(0)
 }
