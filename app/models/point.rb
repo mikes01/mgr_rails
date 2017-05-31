@@ -1,4 +1,6 @@
 class Point < ApplicationRecord
+  extend GisSupport
+
   OBJECT_TYPES = {"część kolonii" => "#8fa3bf", "część miasta" => "#e51f00",
     "część osady" => "#ffa280", "część przysiółka" => "#e6f23d",
     "część wsi" => "#a6a37c", "kolonia" => "#3b5900", "kolonia kolonii" => "#3df23d",
@@ -29,5 +31,10 @@ class Point < ApplicationRecord
 
   def color
     OBJECT_TYPES[object_type]
+  end
+
+  def self.in_area(north_east_lat, north_east_lng, south_west_lat, south_west_lng, object_type)
+    objects_in_area(north_east_lat, north_east_lng, south_west_lat,
+    south_west_lng, object_type, :object_type)
   end
 end

@@ -1,4 +1,6 @@
 class Line < ApplicationRecord
+  extend GisSupport
+
   ROAD_TYPES = { "bridleway" => "#33cc85", "cycleway" => "#661a57",
     "footway" => "#4d2636", "living_street" => "#ffbfbf", "motorway" => "#997873",
     "motorway_link" => "#ff8800", "path" => "#d9b56c", "pedestrian" => "#ffff00",
@@ -16,5 +18,10 @@ class Line < ApplicationRecord
 
   def color
     ROAD_TYPES[road_type]
+  end
+
+  def self.in_area(north_east_lat, north_east_lng, south_west_lat, south_west_lng, road_type)
+    objects_in_area(north_east_lat, north_east_lng, south_west_lat,
+    south_west_lng, road_type, :road_type)
   end
 end

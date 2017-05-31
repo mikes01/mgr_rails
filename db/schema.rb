@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527084351) do
+ActiveRecord::Schema.define(version: 20170527150038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20170527084351) do
     t.string   "road_type",                                                     default: ""
     t.datetime "created_at",                                                                 null: false
     t.datetime "updated_at",                                                                 null: false
+    t.index ["coordinates"], name: "index_lines_on_coordinates", using: :gist
+    t.index ["road_type"], name: "index_lines_on_road_type", using: :btree
   end
 
   create_table "points", force: :cascade do |t|
@@ -51,6 +53,8 @@ ActiveRecord::Schema.define(version: 20170527084351) do
     t.string   "terc"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.index ["coordinates"], name: "index_points_on_coordinates", using: :gist
+    t.index ["object_type"], name: "index_points_on_object_type", using: :btree
   end
 
   create_table "polygons", force: :cascade do |t|
@@ -60,6 +64,8 @@ ActiveRecord::Schema.define(version: 20170527084351) do
     t.integer  "unit_type",                                              null: false
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
+    t.index ["coordinates"], name: "index_polygons_on_coordinates", using: :gist
+    t.index ["unit_type"], name: "index_polygons_on_unit_type", using: :btree
   end
 
   create_table "populations", force: :cascade do |t|
